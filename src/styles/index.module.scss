@@ -1,0 +1,21 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  background-color: orange;
+  grid-template-columns: 15rem 1fr;
+  grid-template-rows: 20rem auto;
+  grid-template-areas:
+    "ts ma"
+    "bs ma";
+
+  .topsidebar {
+    grid-area: ts;
+  }
+  .bottomsidevar {
+    grid-area: bs;
+  }
+  .mainbar {
+    grid-area: ma;
+  }
+}
