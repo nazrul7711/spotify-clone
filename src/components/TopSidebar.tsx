@@ -16,13 +16,10 @@ const TopSidebar = ({className}:TopsidebarProps) => {
         <SidebarItem Icon={AiOutlineHome} title={"Home"} />
         <SidebarItem Icon={AiOutlineSearch} title={"Search"} />
       </div>
-      <div className={styles.secondBox}>
-        <div >
-          <AiOutlinePlus />
-        </div>
-      </div>
+      
     </div>
   );
 };
 
 export default TopSidebar;
+
