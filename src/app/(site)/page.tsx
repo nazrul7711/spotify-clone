@@ -20,4 +20,7 @@ font figtree
 title and description chnage
 sidebar
 usePathname
+useRouter is imported from next/navigation 
+to use useSession make a seperate provider component that wraps children with Session and then wrap this component inside layout component and wrap the children that is inside body
+
 */
