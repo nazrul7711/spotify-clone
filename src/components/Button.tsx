@@ -7,6 +7,7 @@ type ButtonProps = {
   backgroundColor?: string;
   color?: string;
   onClick?: () => void;
+  className?:string
 };
 
 const Button = ({
@@ -15,12 +16,13 @@ const Button = ({
   backgroundColor,
   color,
   onClick,
+  className
 }: ButtonProps) => {
   return (
     <div>
       <button
         type={type}
-        className={styles.btn}
+        className={`${styles.btn} ${className}`}
         style={{ backgroundColor: `${backgroundColor}`, color: `${color}` }}
         onClick={onClick}
       >
