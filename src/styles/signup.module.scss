@@ -152,8 +152,11 @@
       }
       input[type="radio"]{
         margin-right: .5rem;
-      }
+      } 
       
     }
+  }
+  .error{
+    color: $red-color;
   }
 }

@@ -10,11 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+enum Gender{
+  Male
+  Female
+  NonBinary
+  Other
+}
+
 model User{
   id String @id @default(auto()) @map("_id")  @db.ObjectId
   name String
   email String @unique
+  gender Gender 
+  dob DateTime @db.Date
   emailVerified DateTime?
+  hashedPassword String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   image String?
   accounts Account[]
   sessions Session[]

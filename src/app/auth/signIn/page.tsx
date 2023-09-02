@@ -1,20 +1,40 @@
+"use client";
 import React from "react";
 import styles from "@/styles/auth.module.scss";
 import { FaSpotify } from "react-icons/fa";
 import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
-import Button from "@/components/Button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+type InputType = {
+  email: string;
+  password: string;
+};
 
 const page = () => {
+  const router = useRouter();
+  function logoHandler() {
+    router.push("/");
+  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>();
+  function submitHandler(data: InputType, e: FormEvent) {
+    e.preventDefault();
+    console.log(data);
+  }
   return (
     <div className={styles.wrapper}>
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={logoHandler}>
         <FaSpotify size={30} />
         <div>Spotify</div>
       </div>
-      <form>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <div className={styles.container}>
           <h1>Log in to Spotify</h1>
           <button>
@@ -35,18 +55,42 @@ const page = () => {
           <span className={styles.line}></span>
           <div className={styles.inputField}>
             <div>Email or username</div>
-            <input type="text" placeholder="Email" />
+            <input
+              type="text"
+              placeholder="Email"
+              {...register("email", { required: "Email is required field" })}
+            />
+            {errors.email && (
+              <p className={styles.error}>{errors.email.message}</p>
+            )}
           </div>
           <div className={styles.inputField}>
             <div>Password</div>
-            <input type="password" placeholder="Password" />
+            <input
+              type="password"
+              placeholder="Password"
+              {...register("password", {
+                required: "password is required field",
+                pattern: {
+                  value:
+                    /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                  message:
+                    "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:",
+                },
+              })}
+            />
+            {errors.password && (
+              <p className={styles.error}>{errors.password.message}</p>
+            )}
           </div>
 
-          <button className={styles.btn}>Log In</button>
+          <button type="submit" className={styles.btn}>
+            Log In
+          </button>
 
           <p>
             Don't have an account?{" "}
-            <Link href="auth/signUp">Sign up for Spotify</Link>
+            <Link href="/auth/signUp">Sign up for Spotify</Link>
           </p>
         </div>
       </form>

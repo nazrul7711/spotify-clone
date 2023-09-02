@@ -16,6 +16,7 @@ export default function Home() {
       <TopSidebar className={styles.topsidebar} />
       <BottomSidebar className={styles.bottomsidebar} />
       <Mainbar className={styles.mainbar} />
+
     </main>
   );
 }
