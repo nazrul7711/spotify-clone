@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import Button from "@/components/Button";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
 
 type InputType = {
   name: string;
@@ -19,9 +20,32 @@ type InputType = {
 };
 
 const page = () => {
-  const { register, handleSubmit,formState:{errors} } = useForm<InputType>();
-  function signupHandler(data: InputType) {
-    console.log(data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>();
+  async function signupHandler(data: InputType) {
+
+    let res = await axios.post("/api/register",{
+      name:data.name,
+      email:data.email,
+      password:data.password,
+      dob:`${data.year}-${data.month}-${data.day}`,
+      gender:data.gender
+
+    });
+    console.log(res)
+
+    // name, email, password, dob, gender;
+
+    //   id String @id @default(auto()) @map("_id")  @db.ObjectId
+    // name String
+    // email String @unique
+    // gender Gender
+    // dob DateTime @db.Date
+    // emailVerified DateTime?
+    // hashedPassword String?
   }
   const currentYear = new Date().getFullYear();
   return (
@@ -159,7 +183,8 @@ const page = () => {
             <label htmlFor="male">
               <input
                 type="radio"
-                value="male"
+                id="male"
+                value="Male"
                 {...register("gender", {
                   required: "This field is mandatory",
                 })}
@@ -170,7 +195,8 @@ const page = () => {
             <label htmlFor="female">
               <input
                 type="radio"
-                value="female"
+                id="female"
+                value="Female"
                 {...register("gender", {
                   required: "This field is mandatory",
                 })}
@@ -180,7 +206,8 @@ const page = () => {
             <label htmlFor="non-binary">
               <input
                 type="radio"
-                value="non-binary"
+                id="non-binary"
+                value="NonBinary"
                 {...register("gender", {
                   required: "This field is mandatory",
                 })}
@@ -190,6 +217,7 @@ const page = () => {
             <label htmlFor="other">
               <input
                 type="radio"
+                id="Other"
                 value="other"
                 {...register("gender", {
                   required: "This field is mandatory",

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { FormEvent } from "react";
 import styles from "@/styles/auth.module.scss";
 import { FaSpotify } from "react-icons/fa";
 import { BsFacebook } from "react-icons/bs";
@@ -8,6 +8,7 @@ import { FaApple } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
 
 type InputType = {
   email: string;
@@ -24,9 +25,17 @@ const page = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<InputType>();
-  function submitHandler(data: InputType, e: FormEvent) {
+  async function submitHandler(data: InputType, e:FormEvent) {
     e.preventDefault();
-    console.log(data);
+    let res = await signIn("credentials",{
+      email:data.email,
+      password:data.password,
+      redirect:false
+    })
+    if(res?.ok){
+      router.push("/");
+    }
+
   }
   return (
     <div className={styles.wrapper}>
