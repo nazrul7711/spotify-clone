@@ -7,7 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { signIn } from "next-auth/react";
 
 type InputType = {
@@ -25,25 +25,24 @@ const page = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<InputType>();
-  async function submitHandler(data: InputType, e:FormEvent) {
-    e.preventDefault();
-    let res = await signIn("credentials",{
-      email:data.email,
-      password:data.password,
-      redirect:false
-    })
-    if(res?.ok){
+
+  const onSubmit: SubmitHandler<InputType> = async (data: InputType) => {
+    let res = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    if (res?.ok) {
       router.push("/");
     }
-
-  }
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo} onClick={logoHandler}>
         <FaSpotify size={30} />
         <div>Spotify</div>
       </div>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.container}>
           <h1>Log in to Spotify</h1>
           <button>

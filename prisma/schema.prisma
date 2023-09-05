@@ -71,11 +71,8 @@ model Song{
   songLink String
 }
 
-// npm install multer
-// const upload = multer({dest:"upload"})
-// upload.single("file")
-// api / upload
-// https://next13-spotify.vercel.app/
+// npm install multer next-connect @aws-sdk/client-s3  @aws-sdk/s3-request-presigner
+
 
 
 
