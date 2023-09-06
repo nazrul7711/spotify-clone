@@ -1,29 +1,7 @@
 @import 'variables';
 .wrapper {
-  width: 100vw;
   height: 100vh;
-  display: grid;
   padding:.3rem;
-  background-color: $black-color;
-  grid-template-columns: 15rem 1fr;
-  grid-template-rows:  auto 1fr;
-  gap:.5rem;
-  grid-template-areas:
-    "ts ma"
-    "bs ma";
-  .topsidebar {
-    grid-area: ts;
-    background-color: $light-grey;
-    border-radius: .3rem;
-  }
-  .bottomsidebar {
-    grid-area: bs;
-    background-color: $light-grey;
-    border-radius: .3rem;
-  }
-  .mainbar {
-    grid-area: ma;
-    background-color: $light-grey;
-    border-radius: .3rem;
-  }
+  background-color: $light-grey;
+
 }

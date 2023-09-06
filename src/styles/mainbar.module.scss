@@ -1,9 +1,36 @@
-@import "variables"; 
-.wrapper{
-  .songgrid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    grid-template-rows:300px ;
-
+@import "variables";
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  padding: 1 rem;
+  background-color: $black-color;
+  gap: 0.5rem;
+  position: relative;
+  grid-template-areas:
+    "ts na"
+    "bs ma";
+  grid-template-columns: 15rem 1fr;
+  grid-template-rows: auto 1fr;
+  .navbar {
+    grid-area: na;
+    border-radius: 0.3rem;
+  }
+  .topsidebar {
+    grid-area: ts;
+    background-color: $light-grey;
+    border-radius: 0.3rem;
+  }
+  .bottomsidebar {
+    grid-area: bs;
+    background-color: $light-grey;
+    border-radius: 0.3rem;
+  }
+  .main {
+    grid-area: ma;
+    background-color: orange;
+  }
+  .modal{
+    z-index: 10;
   }
 }

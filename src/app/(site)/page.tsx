@@ -5,6 +5,7 @@ import BottomSidebar from "@/components/BottomSidebar";
 
 import Mainbar from "@/components/Mainbar";
 import ReactHookForm from "@/components/ReactHookForm";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   type Inputs = {
@@ -13,10 +14,7 @@ export default function Home() {
   };
   return (
     <main className={styles.wrapper}>
-      <TopSidebar className={styles.topsidebar} />
-      <BottomSidebar className={styles.bottomsidebar} />
-      <Mainbar className={styles.mainbar} />
-
+      this is the first landing page
     </main>
   );
 }

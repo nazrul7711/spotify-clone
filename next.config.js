@@ -9,8 +9,6 @@ const nextConfig = {
     DATABASE_URL:
       "mongodb+srv://nazrul:CUwOi06Y6xL6MKtT@cluster0.wew6u.mongodb.net/spotify-clone",
     NEXTAUTH_SECRET: "nazrul",
-    AWS_ACCESS_KEY: "AKIA3BVRDWEHJ6CO5F72",
-    AWS_SECRET_ACCESS_KEY: "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",
   },
 };
 

@@ -16,4 +16,12 @@ import {S3} from "aws-sdk"
 
 /*
 search and home color depend on active
+in s3 upload song and image
+customer
+liked songs
+prices products
+songs subscription 
+users
+the plus sign if the user is logout should prompt to login 
+the modal should say 
 */

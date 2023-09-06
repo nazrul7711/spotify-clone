@@ -1,8 +1,10 @@
 @import "variables";
 .wrapper{
-  height: 100%;
-  background-color: green;
   display: flex;
   flex-direction:column ;
+  .active{
+    color:$white-color
+  }
 
 }
+
