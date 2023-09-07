@@ -5,16 +5,18 @@ import styles from "@/styles/bottomsidebar.module.scss";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsMusicNoteList } from "react-icons/bs";
 import { useSession } from "next-auth/react";
-import * as Dialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { useAppDispatch} from "@/app/store/hook";
+import { openModal } from "@/app/store/spotifySlice";
 
 interface BottomBarProps extends mainbarprops {}
 
 const BottomSidebar = ({ className }: BottomBarProps) => {
-  let [showModal, setShowModal] = useState<boolean>(false);
+  let dispatch = useAppDispatch()
   let { data } = useSession();
   let user = data?.user;
-  function songAddHandler() {}
+  function songAddHandler() {
+    dispatch(openModal())
+  }
   return (
     <div className={`${className} ${styles.wrapper}`}>
       <div>
@@ -24,7 +26,7 @@ const BottomSidebar = ({ className }: BottomBarProps) => {
           </div>
           <div>Your Library</div>
         </div>
-        <div onClick={songAddHandler}>
+        <div onClick={songAddHandler} className={styles.plus}>
           <AiOutlinePlus />
         </div>
       </div>

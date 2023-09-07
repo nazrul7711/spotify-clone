@@ -6,15 +6,24 @@ import BottomSidebar from "@/components/BottomSidebar";
 import Mainbar from "@/components/Mainbar";
 import ReactHookForm from "@/components/ReactHookForm";
 import { useSession } from "next-auth/react";
+import { useAppDispatch, useAppSelector } from "../store/hook";
+import { increment, decrement } from "@/app/store/spotifySlice";
 
 export default function Home() {
   type Inputs = {
     name: string;
     surname: string;
   };
+  const count = useAppSelector((state) => state.spotify.value);
+  const dispatch = useAppDispatch();
+  console.log(count);
+
   return (
     <main className={styles.wrapper}>
       this is the first landing page
+      <div>{count}</div>
+      <button onClick={() => dispatch(increment())}>increment</button>
+      <button onClick={() => dispatch(decrement())}>decrement</button>
     </main>
   );
 }
@@ -103,16 +112,14 @@ to write backend apis create a folder in pages folder named api
  * now app instead of pages
  * but if u want u still can make a pages folder and define like index.js and that will still work
  * dashboard folder / page.tsx mandatory
- * (dummy) for grouping
+ * (dummy) for grouping 
  * all components are server components and to make them client component "use client" to, add hook, event listeners 
  * backend codes use server components
  * if u wanna use client code in server component make client component and use context there and make it a wrapper to wrap around server component
  * u can make server components async and use axios out of the box no useEffect 
- * suppose u have a server code thats fetching data and it takes time u have for this a loading.tsx define and it will be rendered meanwhile your page.tsx is ready with the data because u cant use state to render different thing
- * u define error.tsx to handle error for server components and as these error.tsx has access to two properties error and reset u have to make this "use client" to use reset
- * if u have a dynamic component like [newsId]/page.tsx . each component is passed props which is a object and it has a params,searchParams. params will have the value of dynamic parameter
- * [newsId]/page.tsx props.params.newsId 
- * searchParams is query parameter from browser /page.tsx params.searchParams.someQuery
+ * loading.tsx?
+ * use of error.tsx ? and what is error and reset? why use use client in there ?
+ * if u have a dynamic component like [newsId]/page.tsx . props in it will contain what ?
  * [...catchAll] params.catchAll=["one","two","three"]
  * if u build your app now the page that is [dynamic] are dynamic means they like server side pages generated for each request
  * but suppose if u have a dashboard page which is static (means no data fetching) we can turn this static page into dynamic one by using await fetch(someurl,{cache:"no store"}) no store means to not cache this page allways fetch fresh data 
@@ -125,7 +132,6 @@ to write backend apis create a folder in pages folder named api
 
 
 */
-
 
 /*
 const upload = multer();
@@ -158,4 +164,46 @@ const handler = nextConnect()
   });
 
 export default handler;
+*/
+
+/*
+REDUX 
+// this is in store
+export default configureStore({
+  reducer:{
+    counter:counterReducer
+  }
+})
+
+export const counterSlice = createSlice({
+  name:"somename",
+  initialState:{
+
+  },
+  reducers:{
+    increment:(state)=>{
+      state.value+1
+    }
+  }
+})
+export const {increment} = counterSlice.actions
+
+export default counterSlice.reducer
+
+const newState = counterSlice.reducer(
+  { value: 10 },
+  counterSlice.actions.increment()
+)
+console.log(newState)
+
+(state)=>state.value+1 
+(state,action)=>state.action.payload 
+
+import {increment} from store
+const dispatch = useDispatch()
+dispatch(increment())
+
+
+
+
 */

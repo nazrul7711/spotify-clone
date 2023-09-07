@@ -1,8 +1,9 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
-import Providers from "@/components/Providers";
+import Provider from "@/components/Provider";
 import Mainbar from "@/components/Mainbar";
+import {Providers} from "@/app/store/Provider";
 
 const inter = Figtree({ subsets: ["latin"] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
-          <Mainbar>{children}</Mainbar>
-        </Providers>
+        <Provider>
+          <Providers>
+            <Mainbar>{children}</Mainbar>
+          </Providers>
+        </Provider>
       </body>
     </html>
   );
