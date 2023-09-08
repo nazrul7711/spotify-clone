@@ -1,9 +1,10 @@
-import React from "react";
+import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "@/styles/addSong.module.scss";
 import { AiOutlineClose } from "react-icons/ai";
 import { useAppDispatch } from "@/app/store/hook";
 import { closeModal } from "@/app/store/spotifySlice";
+import { S3Client,PutObjectCommand} from "@aws-sdk/client-s3";
 
 type FormType = {
   title: string;
@@ -13,17 +14,29 @@ type FormType = {
 };
 
 const AddSong = () => {
-  const dispatch = useAppDispatch()
+  const S3 = new S3Client({
+    region: process.env.BUCKET_REGION!,
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY!,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    },
+  });
+  // AWS_ACCESS_KEY = "AKIA3BVRDWEHJ6CO5F72";
+  // AWS_SECRET_ACCESS_KEY = "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";
+  // BUCKET_NAME = "nextjs-project-nazrul";
+  // BUCKET_REGION = "ap-south-1";
+
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormType>();
   function closeHandler() {
-    dispatch(closeModal())
+    dispatch(closeModal());
   }
   const submitHandler: SubmitHandler<FormType> = (data) => {
-
+    console.log(data.song[0]);
   };
   return (
     <div className={styles.wrapper}>

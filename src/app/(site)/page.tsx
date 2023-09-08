@@ -1,11 +1,5 @@
 "use client";
-import TopSidebar from "@/components/TopSidebar";
 import styles from "@/styles/index.module.scss";
-import BottomSidebar from "@/components/BottomSidebar";
-
-import Mainbar from "@/components/Mainbar";
-import ReactHookForm from "@/components/ReactHookForm";
-import { useSession } from "next-auth/react";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { increment, decrement } from "@/app/store/spotifySlice";
 
@@ -16,7 +10,9 @@ export default function Home() {
   };
   const count = useAppSelector((state) => state.spotify.value);
   const dispatch = useAppDispatch();
-  console.log(count);
+  
+
+
 
   return (
     <main className={styles.wrapper}>
@@ -207,3 +203,6 @@ dispatch(increment())
 
 
 */
+
+
+
